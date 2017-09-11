@@ -1,37 +1,36 @@
+/*
+ * 地図上に表示するマーカオブジェクトを生成するクラス
+ */
 export default class Marker
 {
   constructor(
     googleApi,
-    map,
     latLng
   )
   {
-    // 緯度
+    /** 緯度・経度 */
     this.lat = latLng.lat();
-    // 経度
     this.lng = latLng.lng();
 
     /** google api を使用してマーカを生成 */
-    this.markerObject =
+    this.gMarker =
       new googleApi.maps.Marker({
         position: latLng
       });
+  }
 
-    /** マーカを配置 */
-    this.markerObject.setMap(map);
+  /** google maps apiが生成したmarkerオブジェクトを取得 */
+  getGMarker()
+  {
+    return this.gMarker;
+  }
 
-    // 情報窓の生成
-    // 別クラスに切り分ける
-    var contentString = 'こんなかんじだね。';
-    contentString = contentString + "<div id='test'><br>管理番号<input type='text'>";
-    contentString = contentString + "<br>評価<select name='hello'><option value='a'>a</option><option value='b'>b</option><option value='c'>c</option></select>";
-    contentString = contentString + "<br><button>登録</button></div>";
-
-    var infowindow = new googleApi.maps.InfoWindow({
-      content: contentString,
-      maxWidth: 200
-    });
-
-    infowindow.open(map, this.markerObject);
+  /*
+   * マーカをマップに配置
+   * @param google map オブジェクト
+   */
+  setToMap(map)
+  {
+    this.gMarker.setMap(map)
   }
 }
