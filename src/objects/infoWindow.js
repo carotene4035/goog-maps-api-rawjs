@@ -7,6 +7,7 @@ export default class InfoWindow
   {
     // this.googleApi = googleApi;
 
+    var id = 1;
     var contentString = '';
 
     contentString = contentString + "<div id='1'>";
